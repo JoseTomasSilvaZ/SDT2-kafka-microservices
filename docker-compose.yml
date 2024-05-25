@@ -7,7 +7,6 @@ services:
     hostname: kafka
     ports:
       - "9094:9094"
-
     environment:
       - KAFKA_CFG_NODE_ID=0
       - KAFKA_CFG_PROCESS_ROLES=controller,broker
