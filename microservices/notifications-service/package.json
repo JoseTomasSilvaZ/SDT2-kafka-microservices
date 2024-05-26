@@ -1,5 +1,5 @@
 {
-  "name": "sdt2-kafka",
+  "name": "notifications-service",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -7,28 +7,27 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
-    "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/apps/sdt2-kafka/main",
+    "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./apps/sdt2-kafka/test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
     "@nestjs-modules/mailer": "^2.0.2",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.2.2",
     "@nestjs/core": "^10.0.0",
-    "@nestjs/microservices": "^10.3.8",
+    "@nestjs/mapped-types": "*",
     "@nestjs/microservices": "^10.3.8",
     "@nestjs/platform-express": "^10.0.0",
     "kafkajs": "^2.2.4",
-    "nodemailer": "^6.9.13",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
     "zod": "^3.23.8"
@@ -63,7 +62,7 @@
       "json",
       "ts"
     ],
-    "rootDir": ".",
+    "rootDir": "src",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
@@ -71,10 +70,7 @@
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],
-    "coverageDirectory": "./coverage",
-    "testEnvironment": "node",
-    "roots": [
-      "<rootDir>/apps/"
-    ]
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
   }
 }
