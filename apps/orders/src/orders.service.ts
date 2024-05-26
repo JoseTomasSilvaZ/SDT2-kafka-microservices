@@ -10,6 +10,9 @@ export class OrdersService {
   ) {}
 
   async create(order: IncomingOrder) {
+    await this.prisma.order.create({
+      data: order,
+    });
     await this.client.emit('order_created', order);
     return order;
   }
