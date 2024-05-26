@@ -9,7 +9,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -22,7 +22,7 @@ enum Status {
 }
 
 model Order {
-  id  String  @id @default(auto()) @map("_id") @db.ObjectId
+  id  String  @id @default(uuid())
   email String
   price Float
   createdAt DateTime @default(now())
