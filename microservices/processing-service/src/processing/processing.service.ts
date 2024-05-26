@@ -12,8 +12,17 @@ export class ProcessingService implements OnModuleInit {
     console.log('connected');
   }
 
-  process(order: any) {
-    order.status = 'Processing';
-    this.client.emit('unfinished_order', order);
+  processCreatedOrder(order: any) {
+    order.status = 1;
+    this.client.emit('order_status_changed', order);
+  }
+
+  async processUpdateOrderStatus(order: any) {
+    if (order.status === 4) {
+      return;
+    }
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    order.status += 1;
+    this.client.emit('order_status_changed', order);
   }
 }
