@@ -14,12 +14,18 @@ datasource db {
 }
 
 
+enum Status {
+  RECEIVED
+  PROCESSING
+  DELIVERING
+  FINISHED
+}
+
 model Order {
-  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  id  String  @id @default(auto()) @map("_id") @db.ObjectId
   email String
   price Float
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  status String
+  status Status @default(RECEIVED)
   item String
 }
