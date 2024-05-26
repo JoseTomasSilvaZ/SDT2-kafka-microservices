@@ -6,8 +6,9 @@ import { EventPattern } from '@nestjs/microservices';
 export class NotificationsController {
   constructor(private readonly notificationsService: NotificationsService) {}
 
-  @EventPattern('unfinished_order')
+  @EventPattern('order_status_changed')
   async handleOrderStatusChanged(data: Record<string, unknown>) {
+    console.log('Order status changed:', data);
     this.notificationsService.sendNotification(data);
   }
 }
