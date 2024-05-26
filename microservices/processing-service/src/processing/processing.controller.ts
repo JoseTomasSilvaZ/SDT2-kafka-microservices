@@ -8,7 +8,11 @@ export class ProcessingController {
 
   @EventPattern('order_created')
   handleOrderCreated(order: any) {
-    console.log(order);
-    return this.processingService.process(order);
+    return this.processingService.processCreatedOrder(order);
+  }
+
+  @EventPattern('order_status_changed')
+  handleOrderStatusChanged(order: any) {
+    return this.processingService.processUpdateOrderStatus(order);
   }
 }
