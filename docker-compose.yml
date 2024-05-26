@@ -31,7 +31,19 @@ services:
       - kafka
     networks:
       - kafka-network
-
+  postgres:
+    image: postgres:13
+    container_name: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: orders
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 networks:
   kafka-network:
     driver: bridge
+volumes:
+  postgres_data:
