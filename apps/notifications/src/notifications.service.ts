@@ -12,7 +12,6 @@ export class NotificationsService implements OnModuleInit {
     private readonly env: EnvService,
   ) {}
   async onModuleInit() {
-    this.client.subscribeToResponseOf('order_status_changed');
     await this.client.connect();
     console.log('Notifications service has been initialized.');
   }
