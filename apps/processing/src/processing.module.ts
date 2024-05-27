@@ -3,9 +3,13 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ProcessingController } from './processing.controller';
 import { ProcessingService } from './processing.service';
 import { PrismaModule } from '@app/prisma';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: ['.env'],
+    }),
     PrismaModule,
     ClientsModule.register([
       {
