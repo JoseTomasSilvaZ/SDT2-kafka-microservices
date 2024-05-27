@@ -10,10 +10,10 @@ export class OrdersService {
   ) {}
 
   async create(order: IncomingOrder) {
-    await this.prisma.order.create({
+    const createdOrder = await this.prisma.order.create({
       data: order,
     });
-    await this.client.emit('order_created', order);
-    return order;
+    await this.client.emit('order_created', createdOrder);
+    return createdOrder;
   }
 }
