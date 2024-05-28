@@ -9,7 +9,7 @@ export class ProcessingController {
 
   @EventPattern('order_created')
   handleOrderCreated(order: Order) {
-    return this.processingService.processCreatedOrder(order);
+    return this.processingService.processUpdateOrderStatus(order);
   }
 
   @EventPattern('order_status_changed')

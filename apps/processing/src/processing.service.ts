@@ -15,15 +15,7 @@ export class ProcessingService implements OnModuleInit {
     console.log('connected');
   }
 
-  async processCreatedOrder(order: Order) {
-    const processedOrder = await this.prisma.order.update({
-      where: { id: order.id },
-      data: { status: 'PROCESSING' },
-    });
-    this.client.emit('order_status_changed', processedOrder);
-  }
   computeNewOrderStatus(order: Order) {
-    console.log('computing new status', order);
     const statusArray = Object.values(Status);
     const currentIndex = statusArray.indexOf(order.status);
     return statusArray[currentIndex + 1] as Status;
@@ -33,7 +25,7 @@ export class ProcessingService implements OnModuleInit {
     if (order.status === 'FINISHED') {
       return;
     }
-    await new Promise((resolve) => setTimeout(resolve, 10000));
+    await new Promise((resolve) => setTimeout(resolve, 15000));
     const newStatus = this.computeNewOrderStatus(order);
     const updatedOrder = await this.prisma.order.update({
       where: { id: order.id },

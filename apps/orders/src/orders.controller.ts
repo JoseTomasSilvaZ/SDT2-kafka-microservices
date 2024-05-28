@@ -8,7 +8,7 @@ export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
   @Post()
-  async createSolicitud(@Body() order: IncomingOrder) {
+  async createOrder(@Body() order: IncomingOrder) {
     await this.ordersService.create(order);
     return order;
   }

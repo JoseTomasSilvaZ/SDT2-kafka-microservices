@@ -21,7 +21,7 @@ export class NotificationsService implements OnModuleInit {
         to: 'josetomassilvaz@gmail.com',
         from: this.env.get('NOTIFICATION_AUTH_USER'),
         subject: `✨ Order ${order.id} - Status changed!`,
-        html: `<b>Order ${order.id}</b> has changed status to <b>${order.status}</b>!`,
+        html: `<b>Order ${order.id}</b> has changed status to <b>${order.status}</b> <br/> at: ${new Date().toLocaleTimeString()}!`,
       });
     } catch (error) {
       console.error(error);
