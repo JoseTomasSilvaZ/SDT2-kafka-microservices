@@ -28,4 +28,5 @@ model Order {
   createdAt DateTime @default(now())
   status Status @default(RECEIVED)
   item String
+  updatedAt DateTime @updatedAt
 }
