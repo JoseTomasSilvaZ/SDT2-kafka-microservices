@@ -11,12 +11,8 @@ export class NotificationsController {
   async handleOrderCreated(order: Order) {
     this.notificationsService.sendNotification(order);
   }
-  @EventPattern('processing_order')
+  @EventPattern(['processing_order', 'delivering_order', 'finished_order'])
   async handleOrderStatusChanged1(order: Order) {
-    this.notificationsService.sendNotification(order);
-  }
-  @EventPattern('delivering_order')
-  async handleOrderStatusChanged(order: Order) {
     this.notificationsService.sendNotification(order);
   }
 }
