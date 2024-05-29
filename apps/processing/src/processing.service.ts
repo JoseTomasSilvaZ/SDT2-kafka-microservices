@@ -20,33 +20,14 @@ export class ProcessingService implements OnModuleInit {
     return statusArray[currentIndex + 1] as Status;
   }
 
-  async processUpdateOrderStatus1(order: Order) {
+  async processUpdateOrderStatus(order: Order) {
     await new Promise((resolve) => setTimeout(resolve, 2000));
+    const newStatus = this.computeNewOrderStatus(order);
     const updatedOrder = await this.prisma.order.update({
       where: { id: order.id },
-      data: { status: 'PROCESSING' },
+      data: { status: newStatus },
     });
 
-    this.client.emit('processing_order', updatedOrder);
-  }
-
-  async processUpdateOrderStatus2(order: Order) {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    const updatedOrder = await this.prisma.order.update({
-      where: { id: order.id },
-      data: { status: 'DELIVERING' },
-    });
-
-    this.client.emit('delivering_order', updatedOrder);
-  }
-
-  async processUpdateOrderStatus3(order: Order) {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    const updatedOrder = await this.prisma.order.update({
-      where: { id: order.id },
-      data: { status: 'FINISHED' },
-    });
-
-    this.client.emit('order_delivered', updatedOrder);
+    this.client.emit(`${newStatus.toLowerCase()}_order`, updatedOrder);
   }
 }

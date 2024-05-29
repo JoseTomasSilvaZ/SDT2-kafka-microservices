@@ -10,16 +10,11 @@ export class ProcessingController {
   @EventPattern('order_created')
   handleOrderCreated(order: Order) {
     console.log('Order created', order);
-    return this.processingService.processUpdateOrderStatus1(order);
+    return this.processingService.processUpdateOrderStatus(order);
   }
 
-  @EventPattern('processing_order')
+  @EventPattern(['processing_order', 'delivering_order'])
   handleOrderStatusChanged1(order: Order) {
-    return this.processingService.processUpdateOrderStatus2(order);
-  }
-
-  @EventPattern('delivering_order')
-  handleOrderStatusChanged2(order: Order) {
-    return this.processingService.processUpdateOrderStatus3(order);
+    return this.processingService.processUpdateOrderStatus(order);
   }
 }
