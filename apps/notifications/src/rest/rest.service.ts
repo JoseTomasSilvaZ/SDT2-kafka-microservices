@@ -5,7 +5,7 @@ import { Injectable } from '@nestjs/common';
 export class NotificationsRestService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async getOrder(id: string) {
+  async getOrder(id: number) {
     try {
       const order = await this.prisma.order.findUnique({
         where: { id },

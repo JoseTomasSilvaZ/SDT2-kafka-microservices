@@ -18,7 +18,7 @@ import { ConfigModule } from '@nestjs/config';
         options: {
           client: {
             clientId: 'orders',
-            brokers: ['localhost:9094'],
+            brokers: [`${process.env.KAFKA_BROKER}`],
           },
           consumer: {
             groupId: 'orders-consumer',

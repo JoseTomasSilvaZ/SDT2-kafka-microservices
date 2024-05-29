@@ -10,9 +10,8 @@ export class ProcessingService implements OnModuleInit {
     private readonly prisma: PrismaService,
   ) {}
   async onModuleInit() {
-    this.client.subscribeToResponseOf('order_created');
     await this.client.connect();
-    console.log('connected');
+    console.log('Processing service has been initialized.');
   }
 
   computeNewOrderStatus(order: Order) {
@@ -21,17 +20,33 @@ export class ProcessingService implements OnModuleInit {
     return statusArray[currentIndex + 1] as Status;
   }
 
-  async processUpdateOrderStatus(order: Order) {
-    if (order.status === 'FINISHED') {
-      return;
-    }
-    await new Promise((resolve) => setTimeout(resolve, 15000));
-    const newStatus = this.computeNewOrderStatus(order);
+  async processUpdateOrderStatus1(order: Order) {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     const updatedOrder = await this.prisma.order.update({
       where: { id: order.id },
-      data: { status: newStatus },
+      data: { status: 'PROCESSING' },
     });
 
-    this.client.emit('order_status_changed', updatedOrder);
+    this.client.emit('processing_order', updatedOrder);
+  }
+
+  async processUpdateOrderStatus2(order: Order) {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    const updatedOrder = await this.prisma.order.update({
+      where: { id: order.id },
+      data: { status: 'DELIVERING' },
+    });
+
+    this.client.emit('delivering_order', updatedOrder);
+  }
+
+  async processUpdateOrderStatus3(order: Order) {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    const updatedOrder = await this.prisma.order.update({
+      where: { id: order.id },
+      data: { status: 'FINISHED' },
+    });
+
+    this.client.emit('order_delivered', updatedOrder);
   }
 }

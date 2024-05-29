@@ -1,0 +1,25 @@
+services:
+  processing:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - APP=processing
+    ports:
+      - '3003-3005:3000' # Cambia los puertos si es necesario para evitar conflictos
+    environment:
+      - NODE_ENV=production
+      - KAFKA_BROKER=kafka:9092
+      - DATABASE_URL=postgresql://user:password@postgres:5432/orders
+    networks:
+      - kafka-network
+    deploy:
+      replicas: 3 # Número de instancias para el microservicio de orders
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+
+networks:
+  kafka-network:

@@ -17,7 +17,7 @@ import { ConfigModule } from '@nestjs/config';
         transport: Transport.KAFKA,
         options: {
           client: {
-            brokers: ['localhost:9094'],
+            brokers: [process.env.KAFKA_BROKER],
             clientId: 'processing',
           },
           consumer: {
