@@ -14,7 +14,7 @@ services:
     networks:
       - kafka-network
     deploy:
-      replicas: 3 # Número de instancias para el microservicio de orders
+      replicas: 9 # Número de instancias para el microservicio de orders
       update_config:
         parallelism: 2
         delay: 10s

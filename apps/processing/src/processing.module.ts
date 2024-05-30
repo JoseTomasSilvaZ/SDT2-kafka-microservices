@@ -4,6 +4,7 @@ import { ProcessingController } from './processing.controller';
 import { ProcessingService } from './processing.service';
 import { PrismaModule } from '@app/prisma';
 import { ConfigModule } from '@nestjs/config';
+import { PartitionAssigners } from 'kafkajs';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { ConfigModule } from '@nestjs/config';
           },
           consumer: {
             groupId: 'processing-consumer',
+            partitionAssigners: [PartitionAssigners.roundRobin],
           },
         },
       },
