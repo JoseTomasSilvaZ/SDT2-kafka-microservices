@@ -10,9 +10,8 @@ export class ProcessingService implements OnModuleInit {
     private readonly prisma: PrismaService,
   ) {}
   async onModuleInit() {
-    this.client.subscribeToResponseOf('order_created');
     await this.client.connect();
-    console.log('connected');
+    console.log('Processing service has been initialized.');
   }
 
   computeNewOrderStatus(order: Order) {
@@ -22,16 +21,13 @@ export class ProcessingService implements OnModuleInit {
   }
 
   async processUpdateOrderStatus(order: Order) {
-    if (order.status === 'FINISHED') {
-      return;
-    }
-    await new Promise((resolve) => setTimeout(resolve, 15000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     const newStatus = this.computeNewOrderStatus(order);
     const updatedOrder = await this.prisma.order.update({
       where: { id: order.id },
       data: { status: newStatus },
     });
 
-    this.client.emit('order_status_changed', updatedOrder);
+    await this.client.emit(`${newStatus.toLowerCase()}_order`, updatedOrder);
   }
 }

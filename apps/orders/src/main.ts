@@ -9,11 +9,10 @@ async function bootstrap() {
     transport: Transport.KAFKA,
     options: {
       client: {
-        brokers: ['localhost:9094'],
+        clientId: 'orders',
+        brokers: [`${process.env.KAFKA_BROKER}`],
       },
-      consumer: {
-        groupId: 'orders-consumer',
-      },
+      producerOnlyMode: true,
     },
   });
   await app.startAllMicroservices();

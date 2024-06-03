@@ -18,7 +18,7 @@ export class NotificationsService implements OnModuleInit {
   async sendNotification(order: Order) {
     try {
       await this.mailer.sendMail({
-        to: 'josetomassilvaz@gmail.com',
+        to: order.email,
         from: this.env.get('NOTIFICATION_AUTH_USER'),
         subject: `✨ Order ${order.id} - Status changed!`,
         html: `<b>Order ${order.id}</b> has changed status to <b>${order.status}</b> <br/> at: ${new Date().toLocaleTimeString()}!`,

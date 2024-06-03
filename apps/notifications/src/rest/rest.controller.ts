@@ -8,7 +8,7 @@ export class NotificationsRestController {
   ) {}
 
   @Get('/order/:id')
-  async getOrder(@Param('id') id: string) {
-    return await this.notificationsRestService.getOrder(id);
+  async getOrder(@Param('id') id: number) {
+    return await this.notificationsRestService.getOrder(+id);
   }
 }

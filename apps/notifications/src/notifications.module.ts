@@ -13,6 +13,7 @@ import { EnvService } from './env/env.service';
     ConfigModule.forRoot({
       validate: (env) => envSchema.parse(env),
       isGlobal: true,
+      envFilePath: ['.env'],
     }),
     EnvModule,
     MailerModule.forRootAsync({
@@ -37,6 +38,7 @@ import { EnvService } from './env/env.service';
         options: {
           client: {
             brokers: ['localhost:9094'],
+            clientId: 'notifications',
           },
           consumer: {
             groupId: 'notifications-consumer',

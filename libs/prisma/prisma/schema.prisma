@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
 }
 
 datasource db {
@@ -22,10 +23,11 @@ enum Status {
 }
 
 model Order {
-  id  String  @id @default(uuid())
+  id  Int  @id @default(autoincrement())
   email String
   price Float
   createdAt DateTime @default(now())
   status Status @default(RECEIVED)
   item String
+  updatedAt DateTime @updatedAt
 }

@@ -7,13 +7,8 @@ import { Order } from '.prisma/client';
 export class ProcessingController {
   constructor(private readonly processingService: ProcessingService) {}
 
-  @EventPattern('order_created')
-  handleOrderCreated(order: Order) {
-    return this.processingService.processUpdateOrderStatus(order);
-  }
-
-  @EventPattern('order_status_changed')
-  handleOrderStatusChanged(order: Order) {
-    return this.processingService.processUpdateOrderStatus(order);
+  @EventPattern(['order_created', 'processing_order', 'delivering_order'])
+  async handleUpdateOrderStatus(order: Order) {
+    return await this.processingService.processUpdateOrderStatus(order);
   }
 }

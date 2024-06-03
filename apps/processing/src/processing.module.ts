@@ -4,6 +4,7 @@ import { ProcessingController } from './processing.controller';
 import { ProcessingService } from './processing.service';
 import { PrismaModule } from '@app/prisma';
 import { ConfigModule } from '@nestjs/config';
+import { PartitionAssigners } from 'kafkajs';
 
 @Module({
   imports: [
@@ -17,11 +18,14 @@ import { ConfigModule } from '@nestjs/config';
         transport: Transport.KAFKA,
         options: {
           client: {
-            brokers: ['localhost:9094'],
+            brokers: [process.env.KAFKA_BROKER],
             clientId: 'processing',
+            
           },
           consumer: {
             groupId: 'processing-consumer',
+
+            partitionAssigners: [PartitionAssigners.roundRobin],
           },
         },
       },
