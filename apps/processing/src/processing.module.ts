@@ -20,9 +20,11 @@ import { PartitionAssigners } from 'kafkajs';
           client: {
             brokers: [process.env.KAFKA_BROKER],
             clientId: 'processing',
+            
           },
           consumer: {
             groupId: 'processing-consumer',
+
             partitionAssigners: [PartitionAssigners.roundRobin],
           },
         },
