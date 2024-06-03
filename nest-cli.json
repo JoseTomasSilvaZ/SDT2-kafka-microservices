@@ -19,33 +19,6 @@
         "tsConfigPath": "apps/sdt2-kafka/tsconfig.app.json"
       }
     },
-    "orders-service": {
-      "type": "application",
-      "root": "apps/orders-service",
-      "entryFile": "main",
-      "sourceRoot": "apps/orders-service/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/orders-service/tsconfig.app.json"
-      }
-    },
-    "notifications-service/": {
-      "type": "application",
-      "root": "apps/notifications-service",
-      "entryFile": "main",
-      "sourceRoot": "apps/notifications-service/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/notifications-service/tsconfig.app.json"
-      }
-    },
-    "processing-service/": {
-      "type": "application",
-      "root": "apps/processing-service",
-      "entryFile": "main",
-      "sourceRoot": "apps/processing-service/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/processing-service/tsconfig.app.json"
-      }
-    },
     "orders": {
       "type": "application",
       "root": "apps/orders",

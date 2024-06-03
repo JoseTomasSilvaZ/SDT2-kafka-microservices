@@ -7,12 +7,13 @@ import { Order } from '.prisma/client';
 export class NotificationsController {
   constructor(private readonly notificationsService: NotificationsService) {}
 
-  @EventPattern('order_created')
-  async handleOrderCreated(order: Order) {
-    this.notificationsService.sendNotification(order);
-  }
-  @EventPattern(['processing_order', 'delivering_order', 'finished_order'])
-  async handleOrderStatusChanged1(order: Order) {
+  @EventPattern([
+    'order_created',
+    'processing_order',
+    'delivering_order',
+    'finished_order',
+  ])
+  async handleOrderStatusUpdated(order: Order) {
     this.notificationsService.sendNotification(order);
   }
 }

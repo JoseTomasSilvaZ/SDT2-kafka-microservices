@@ -12,9 +12,7 @@ async function bootstrap() {
         clientId: 'orders',
         brokers: [`${process.env.KAFKA_BROKER}`],
       },
-      consumer: {
-        groupId: 'orders-consumer',
-      },
+      producerOnlyMode: true,
     },
   });
   await app.startAllMicroservices();

@@ -15,6 +15,7 @@ export class NotificationsRestService {
       }
       return order;
     } catch (error) {
+      console.log(error);
       return { error: 'Something went wrong' };
     }
   }

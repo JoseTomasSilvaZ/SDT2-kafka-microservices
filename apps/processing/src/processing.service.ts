@@ -28,6 +28,6 @@ export class ProcessingService implements OnModuleInit {
       data: { status: newStatus },
     });
 
-    this.client.emit(`${newStatus.toLowerCase()}_order`, updatedOrder);
+    await this.client.emit(`${newStatus.toLowerCase()}_order`, updatedOrder);
   }
 }
